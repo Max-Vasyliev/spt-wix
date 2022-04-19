@@ -21,8 +21,6 @@ Route::get('/', function () {
 //Route::match(['get', 'post'], '/redirect', function () {
 //    return view('test');
 //});
-Route::group(['middleware' => ['cors']], function () {
     /* BigCommerce App Init */
     Route::get('/auth', [WixController::class, 'auth'])->name('auth');
     Route::match(['get', 'post'], '/', [WixController::class, 'index'])->name('integrations-index');
-});
