@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WixController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+//
+//Route::match(['get', 'post'], '/redirect', function () {
+//    return view('test');
+//});
+Route::group(['middleware' => ['cors']], function () {
+    /* BigCommerce App Init */
+    Route::get('/auth', [WixController::class, 'auth'])->name('auth');
+    Route::match(['get', 'post'], '/', [WixController::class, 'index'])->name('integrations-index');
 });
