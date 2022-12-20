@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\WixController;
+use App\Http\Controllers\EcwidController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-});
+
 //
 //Route::match(['get', 'post'], '/redirect', function () {
 //    return view('test');
 //});
-    /* BigCommerce App Init */
-    Route::get('/auth', [WixController::class, 'auth'])->name('auth');
-    Route::match(['get', 'post'], '/', [WixController::class, 'index'])->name('integrations-index');
+/* BigCommerce App Init */
+Route::match(['post','get'], '/ecwid-integration', [EcwidController::class, 'index']);
+Route::match(['post','get'], '/spt-base-script', [EcwidController::class, 'getScript']);
+Route::match(['post','get'], '/ecwid-web-hooks', [EcwidController::class, 'webHookProcess']);
+
